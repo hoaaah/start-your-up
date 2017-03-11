@@ -1,0 +1,48 @@
+{
+    "name": "hoaaah/corporate-site",
+    "description": "Template for Corporate Landing Page Site",
+    "keywords": ["hoaaah", "corporate", "yii2", "landing"],
+    "homepage": "http://www.belajararief..com/",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/hoaaah/corporate-site/issues?state=open",
+        "forum": "http://www.belajararief.com/forum/",
+        "wiki": "http://www.belajararief.com/wiki/",
+        "irc": "irc://irc.freenode.net/yii",
+        "source": "https://github.com/hoaaah/corporate-site"
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "~2.0.6",
+        "yiisoft/yii2-bootstrap": "~2.0.0",
+        "yiisoft/yii2-swiftmailer": "~2.0.0",
+        "2amigos/yii2-google-maps-library": "*",
+        "2amigos/yii2-leaflet-extension": "~1.0",
+        "kolyunya/yii2-map-input-widget": "~1.1",
+        "voime/yii2-google-maps": "*",
+        "2amigos/yii2-ckeditor-widget": "^2.0",
+        "hoaaah/yii2-startbootstrap-stylish-portfolio": "dev-master" 
+    },
+    "require-dev": {
+        "yiisoft/yii2-debug": "~2.0.0",
+        "yiisoft/yii2-gii": "~2.0.0",
+        "yiisoft/yii2-faker": "~2.0.0",
+
+        "codeception/base": "^2.2.3",
+        "codeception/verify": "~0.3.1"
+    },
+    "config": {
+        "process-timeout": 1800
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": "php init --env=Development --overwrite=n"
+    }
+}
