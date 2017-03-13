@@ -23,7 +23,13 @@
         "kolyunya/yii2-map-input-widget": "~1.1",
         "voime/yii2-google-maps": "*",
         "2amigos/yii2-ckeditor-widget": "^2.0",
-        "hoaaah/yii2-startbootstrap-stylish-portfolio": "dev-master" 
+        "c006/yii2-migration-utility": "dev-master",
+        "kartik-v/yii2-grid": "@dev",
+        "kartik-v/yii2-detail-view": "*",
+        "bizley/quill": "^2.0",
+        "hoaaah/yii2-startbootstrap-agency": "dev-master",
+        "kartik-v/yii2-widgets": "*" ,
+        "sjaakp/yii2-symbol-picker": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

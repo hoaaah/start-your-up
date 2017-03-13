@@ -35,11 +35,25 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        // ['label' => 'Home', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = ['label' => 'Homepage Setting', 'url' => ['/homepage']];
+        $menuItems[] = ['label' => 'Homepage Content', 
+            'items' => [
+                ['label' => 'Services', 'url' => ['/services']],
+                ['label' => 'Portofolio', 'url' => ['/portofolio']],
+                ['label' => 'About', 'url' => '#' ],
+                ['label' => 'Team Member', 'url' => ['/team']],
+                ['label' => 'Partner', 'url' => '#'],
+                ['label' => 'Location', 'url' => '#'],
+                ['label' => 'News and Articles', 'url' => ['/articles']],
+            ]
+        ];
+
+        // logout
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
