@@ -10,6 +10,8 @@ use yii\bootstrap\Modal;
 
 $this->title = 'Teams';
 $this->params['breadcrumbs'][] = $this->title;
+\common\assets\UploadAsset::register($this);
+$image = \common\assets\UploadAsset::register($this);
 ?>
 <div class="team-index">
 
@@ -49,15 +51,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            [
+                'label' => 'Person',
+                'format' => 'raw',
+                'value' => function($model) use($image) {
+                    return Html::img($image->baseUrl.'/avatar/'.$model->avatar, ['width' => '70px', 'title' => $model->name, 'alt' => $model->name]);
+                }
+            ],
             'name',
             'job',
-            'content:ntext',
-            'twitter_account',
+            'content:raw',
+            // 'twitter_account',
             // 'facebook_account',
             // 'linkedin_account',
-            // 'avatar',
+            // 'homepage',
             // 'created_at',
             // 'updated_at',
             // 'created_by',
@@ -98,6 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'options' => [
             'tabindex' => false // important for Select2 to work properly
         ], 
+    'size'=>'modal-lg',
 ]);
  
 echo '...';
@@ -110,6 +118,7 @@ Modal::begin([
         'options' => [
             'tabindex' => false // important for Select2 to work properly
         ], 
+    'size'=>'modal-lg',
 ]);
  
 echo '...';

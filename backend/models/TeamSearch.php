@@ -18,7 +18,7 @@ class TeamSearch extends Team
     public function rules()
     {
         return [
-            [['id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'homepage', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name', 'job', 'content', 'twitter_account', 'facebook_account', 'linkedin_account', 'avatar'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class TeamSearch extends Team
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'homepage' => $this->homepage,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,

@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'facebook_account',
             'linkedin_account',
             'avatar',
+            'homepage',
             'created_at',
             'updated_at',
             'created_by',

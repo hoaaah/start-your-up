@@ -36,6 +36,8 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'avatar') ?>
 
+    <?php // echo $form->field($model, 'homepage') ?>
+
     <?php // echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>

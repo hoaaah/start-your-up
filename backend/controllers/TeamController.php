@@ -8,6 +8,7 @@ use backend\models\TeamSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * TeamController implements the CRUD actions for Team model.
@@ -66,8 +67,19 @@ class TeamController extends Controller
         $model = new Team();
 
         if ($model->load(Yii::$app->request->post())) {
+            $image = UploadedFile::getInstance($model, 'file');
+            IF($image){
+                $ext = explode(".", $image->name);
+                $ext = end($ext);
+                $model->avatar = $model->name.'.'.$ext;
+                $path = Yii::$app->params['uploadPath'] . 'avatar\\' . $model->avatar;
+            }
+            // var_dump($image);
             IF($model->save()){
-                echo 1;
+                IF($image) $image->saveAs($path);
+                // var_dump($image);
+                // echo 1;
+                return $this->redirect(Yii::$app->request->referrer);
             }ELSE{
                 echo 0;
             }
@@ -89,8 +101,17 @@ class TeamController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
+            $image = UploadedFile::getInstance($model, 'file');
+            IF($image){
+                $ext = explode(".", $image->name);
+                $ext = end($ext);
+                $model->avatar = $model->name.'.'.$ext;
+                $path = Yii::$app->params['uploadPath'] . 'avatar\\' . $model->avatar;
+            }
             IF($model->save()){
-                echo 1;
+                IF($image) $image->saveAs($path);
+                // echo 1;
+                return $this->redirect(Yii::$app->request->referrer);
             }ELSE{
                 echo 0;
             }

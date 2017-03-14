@@ -93,11 +93,12 @@ class PortofolioController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $image = UploadedFile::getInstance($model, 'file');
-            $model->image = $image->name;
-            $path = Yii::$app->params['uploadPath'] . 'portofolio\\' . $model->image;
-
+            IF($image){
+                $model->image = $image->name;
+                $path = Yii::$app->params['uploadPath'] . 'portofolio\\' . $model->image;
+            }
             if($model->save()){
-                $image->saveAs($path);
+                IF($image) $image->saveAs($path);
                 return $this->redirect(['view', 'id'=>$model->id]);
             }
 
