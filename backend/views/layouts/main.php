@@ -47,7 +47,7 @@ AppAsset::register($this);
                 ['label' => 'Portofolio', 'url' => ['/portofolio']],
                 ['label' => 'About', 'url' => '#' ],
                 ['label' => 'Team Member', 'url' => ['/team']],
-                ['label' => 'Partner', 'url' => '#'],
+                ['label' => 'Partner', 'url' => ['/partner']],
                 ['label' => 'Location', 'url' => '#'],
                 ['label' => 'News and Articles', 'url' => ['/articles']],
             ]

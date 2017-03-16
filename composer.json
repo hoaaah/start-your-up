@@ -29,7 +29,8 @@
         "bizley/quill": "^2.0",
         "hoaaah/yii2-startbootstrap-agency": "dev-master",
         "kartik-v/yii2-widgets": "*" ,
-        "sjaakp/yii2-symbol-picker": "dev-master"
+        "sjaakp/yii2-symbol-picker": "dev-master",
+        "2amigos/yii2-multi-select-widget": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

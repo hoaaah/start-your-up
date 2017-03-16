@@ -10,4 +10,9 @@ use yii\web\AssetBundle;
 class UploadAsset extends AssetBundle
 {
     public $sourcePath = '@common/web';
+    public $baseUrl    = '@web';
+
+    public $publishOptions = [
+        'forceCopy'=>true,
+    ];        
 }

@@ -5,28 +5,29 @@ use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\TeamSearch */
+/* @var $searchModel backend\models\PartnerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Teams';
+$this->title = 'Partners';
 $this->params['breadcrumbs'][] = $this->title;
+// \common\assets\UploadAsset::register($this);
 $image = \common\assets\UploadAsset::register($this);
 ?>
-<div class="team-index">
+<div class="partner-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Add Team', ['create'], [
+        <?= Html::a('Add Partner', ['create'], [
                                                     'class' => 'btn btn-xs btn-success',
                                                     'data-toggle'=>"modal",
                                                     'data-target'=>"#myModal",
-                                                    'data-title'=>"AddTeam",
+                                                    'data-title'=>"AddPartner",
                                                     ]) ?>
     </p>
     <?= GridView::widget([
-        'id' => 'team',    
+        'id' => 'partner',    
         'dataProvider' => $dataProvider,
         'export' => false, 
         'responsive'=>true,
@@ -45,16 +46,16 @@ $image = \common\assets\UploadAsset::register($this);
         ],
         'pjax'=>true,
         'pjaxSettings'=>[
-            'options' => ['id' => 'team-pjax', 'timeout' => 5000],
+            'options' => ['id' => 'partner-pjax', 'timeout' => 5000],
         ],        
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'label' => 'Person',
+                'label' => 'Partner',
                 'format' => 'raw',
                 'value' => function($model) use($image) {
-                    IF($model->avatar) return Html::img($image->baseUrl.'/avatar/'.$model->avatar, ['width' => '70px', 'title' => $model->name, 'alt' => $model->name]);
+                    IF($model->logo) return Html::img($image->baseUrl.'/partner/'.$model->logo, ['width' => '70px', 'title' => $model->name, 'alt' => $model->name]);
                 }
             ],
             'name',
@@ -104,7 +105,7 @@ $image = \common\assets\UploadAsset::register($this);
         'options' => [
             'tabindex' => false // important for Select2 to work properly
         ], 
-    'size'=>'modal-lg',
+    'size' => 'modal-lg',
 ]);
  
 echo '...';
@@ -117,7 +118,7 @@ Modal::begin([
         'options' => [
             'tabindex' => false // important for Select2 to work properly
         ], 
-    'size'=>'modal-lg',
+    'size' => 'modal-lg',
 ]);
  
 echo '...';
