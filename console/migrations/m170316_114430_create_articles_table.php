@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `team`.
+ * Handles the creation of table `articles`.
  */
-class m170313_170939_create_team_table extends Migration
+class m170316_114430_create_articles_table extends Migration
 {
     /**
      * @inheritdoc
      */
     public function up()
     {
-        // $this->createTable('team', [
+        // $this->createTable('articles', [
         //     'id' => $this->primaryKey(),
         // ]);
 
@@ -23,20 +23,15 @@ class m170313_170939_create_team_table extends Migration
         $tableOptions_pgsql = "";
         $tableOptions_sqlite = "";
         /* MYSQL */
-        if (!in_array('team', $tables))  { 
+        if (!in_array('articles', $tables))  { 
         if ($dbType == "mysql") {
-            $this->createTable('{{%team}}', [
+            $this->createTable('{{%articles}}', [
                 'id' => 'INT(11) NOT NULL AUTO_INCREMENT',
                 0 => 'PRIMARY KEY (`id`)',
-                'name' => 'VARCHAR(100) NOT NULL',
-                'job' => 'VARCHAR(100) NOT NULL',
-                'content' => 'TEXT NULL',
-                'twitter_account' => 'VARCHAR(100) NULL',
-                'facebook_account' => 'VARCHAR(100) NULL',
-                'linkedin_account' => 'VARCHAR(100) NULL',
-                'avatar' => 'VARCHAR(255) NULL',
+                'title' => 'VARCHAR(255) NOT NULL',
+                'content' => 'LONGTEXT NULL',
                 'published' => 'TINYINT(1) NULL',
-                'homepage' => 'TINYINT(1) NULL',
+                'archived' => 'TINYINT(1) NULL',
                 'created_at' => 'INT(11) NULL',
                 'updated_at' => 'INT(11) NULL',
                 'created_by' => 'INT(11) NULL',
@@ -46,20 +41,15 @@ class m170313_170939_create_team_table extends Migration
         }
         
         /* MSSQL */
-        if (!in_array('team', $tables))  { 
+        if (!in_array('articles', $tables))  { 
         if ($dbType == "mssql") {
-            $this->createTable('{{%team}}', [
+            $this->createTable('{{%articles}}', [
                 'id' => 'INT(11) IDENTITY NOT NULL',
                 0 => 'PRIMARY KEY (`id`)',
-                'name' => 'VARCHAR(100) NOT NULL',
-                'job' => 'VARCHAR(100) NOT NULL',
-                'content' => 'TEXT NULL',
-                'twitter_account' => 'VARCHAR(100) NULL',
-                'facebook_account' => 'VARCHAR(100) NULL',
-                'linkedin_account' => 'VARCHAR(100) NULL',
-                'avatar' => 'VARCHAR(255) NULL',
+                'title' => 'VARCHAR(255) NOT NULL',
+                'content' => 'LONGTEXT NULL',
                 'published' => 'TINYINT(1) NULL',
-                'homepage' => 'TINYINT(1) NULL',
+                'archived' => 'TINYINT(1) NULL',
                 'created_at' => 'INT(11) NULL',
                 'updated_at' => 'INT(11) NULL',
                 'created_by' => 'INT(11) NULL',
@@ -69,20 +59,15 @@ class m170313_170939_create_team_table extends Migration
         }
         
         /* PGSQL */
-        if (!in_array('team', $tables))  { 
+        if (!in_array('articles', $tables))  { 
         if ($dbType == "pgsql") {
-            $this->createTable('{{%team}}', [
+            $this->createTable('{{%articles}}', [
                 'id' => 'INT(11) SERIAL NOT NULL',
                 0 => 'PRIMARY KEY (`id`)',
-                'name' => 'VARCHAR(100) NOT NULL',
-                'job' => 'VARCHAR(100) NOT NULL',
-                'content' => 'TEXT NULL',
-                'twitter_account' => 'VARCHAR(100) NULL',
-                'facebook_account' => 'VARCHAR(100) NULL',
-                'linkedin_account' => 'VARCHAR(100) NULL',
-                'avatar' => 'VARCHAR(255) NULL',
+                'title' => 'VARCHAR(255) NOT NULL',
+                'content' => 'LONGTEXT NULL',
                 'published' => 'TINYINT(1) NULL',
-                'homepage' => 'TINYINT(1) NULL',
+                'archived' => 'TINYINT(1) NULL',
                 'created_at' => 'INT(11) NULL',
                 'updated_at' => 'INT(11) NULL',
                 'created_by' => 'INT(11) NULL',
@@ -92,20 +77,15 @@ class m170313_170939_create_team_table extends Migration
         }
         
         /* SQLITE */
-        if (!in_array('team', $tables))  { 
+        if (!in_array('articles', $tables))  { 
         if ($dbType == "sqlite") {
-            $this->createTable('{{%team}}', [
+            $this->createTable('{{%articles}}', [
                 'id' => 'INT(11) NOT NULL AUTOINCREMENT',
                 0 => 'PRIMARY KEY (`id`)',
-                'name' => 'VARCHAR(100) NOT NULL',
-                'job' => 'VARCHAR(100) NOT NULL',
-                'content' => 'TEXT NULL',
-                'twitter_account' => 'VARCHAR(100) NULL',
-                'facebook_account' => 'VARCHAR(100) NULL',
-                'linkedin_account' => 'VARCHAR(100) NULL',
-                'avatar' => 'VARCHAR(255) NULL',
+                'title' => 'VARCHAR(255) NOT NULL',
+                'content' => 'LONGTEXT NULL',
                 'published' => 'TINYINT(1) NULL',
-                'homepage' => 'TINYINT(1) NULL',
+                'archived' => 'TINYINT(1) NULL',
                 'created_at' => 'INT(11) NULL',
                 'updated_at' => 'INT(11) NULL',
                 'created_by' => 'INT(11) NULL',
@@ -121,7 +101,7 @@ class m170313_170939_create_team_table extends Migration
     public function down()
     {
         $this->execute('SET foreign_key_checks = 0');
-        $this->dropTable('team');
+        $this->dropTable('articles');
         $this->execute('SET foreign_key_checks = 1;');
     }
 }
