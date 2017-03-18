@@ -19,18 +19,16 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "2amigos/yii2-google-maps-library": "*",
-        "2amigos/yii2-leaflet-extension": "~1.0",
         "kolyunya/yii2-map-input-widget": "~1.1",
-        "voime/yii2-google-maps": "*",
         "2amigos/yii2-ckeditor-widget": "^2.0",
-        "c006/yii2-migration-utility": "dev-master",
         "kartik-v/yii2-grid": "@dev",
         "kartik-v/yii2-detail-view": "*",
         "bizley/quill": "^2.0",
         "hoaaah/yii2-startbootstrap-agency": "dev-master",
         "kartik-v/yii2-widgets": "*" ,
         "sjaakp/yii2-symbol-picker": "dev-master",
-        "2amigos/yii2-multi-select-widget": "*"
+        "2amigos/yii2-multi-select-widget": "*",
+        "kartik-v/yii2-tabs-x": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -38,7 +36,9 @@
         "yiisoft/yii2-faker": "~2.0.0",
 
         "codeception/base": "^2.2.3",
-        "codeception/verify": "~0.3.1"
+        "codeception/verify": "~0.3.1",
+        
+        "c006/yii2-migration-utility": "dev-master"
     },
     "config": {
         "process-timeout": 1800

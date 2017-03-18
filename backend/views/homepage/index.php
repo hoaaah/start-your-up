@@ -1,9 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use kartik\detail\DetailView;
+use dosamigos\multiselect\MultiSelect;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\CompanySearch */
@@ -12,7 +14,8 @@ use kartik\detail\DetailView;
 $this->title = 'Homepage';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?php IF(isset($model)){
+<?php 
+IF(isset($model)):
     echo DetailView::widget([
         'model' => $model,
         'condensed'=>true,
@@ -161,5 +164,66 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]);
-}
+?>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Selected in Homepage</div>
+        <div class="panel-body">
+            <?php $form = ActiveForm::begin(['id' => $homepage->formName()]); ?>
+            <?=
+            $form->field($homepage, 'services')->widget(Multiselect::className(), [
+                "options" => ['multiple'=>"multiple"], // for the actual multiselect
+                'data' => $services,
+                "clientOptions" => 
+                    [
+                        "includeSelectAllOption" => true,
+                        'numberDisplayed' => 10
+                    ], 
+            ]);           
+            ?>
+
+            <?=
+            $form->field($homepage, 'portofolio')->widget(Multiselect::className(), [
+                "options" => ['multiple'=>"multiple"], // for the actual multiselect
+                'data' => $portofolio,
+                "clientOptions" => 
+                    [
+                        "includeSelectAllOption" => true,
+                        'numberDisplayed' => 10
+                    ], 
+            ]);           
+            ?>
+
+            <?=
+            $form->field($homepage, 'team')->widget(Multiselect::className(), [
+                "options" => ['multiple'=>"multiple"], // for the actual multiselect
+                'data' => $team,
+                "clientOptions" => 
+                    [
+                        "includeSelectAllOption" => true,
+                        'numberDisplayed' => 10
+                    ], 
+            ]);           
+            ?>
+
+            <?=
+            $form->field($homepage, 'partner')->widget(Multiselect::className(), [
+                "options" => ['multiple'=>"multiple"], // for the actual multiselect
+                'data' => $partner,
+                "clientOptions" => 
+                    [
+                        "includeSelectAllOption" => true,
+                        'numberDisplayed' => 10
+                    ], 
+            ]);           
+            ?>
+
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
+<?php    
+endif;
 ?>
