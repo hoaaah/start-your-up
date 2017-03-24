@@ -72,7 +72,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = \common\models\Company::findOne(1);
+        $services = \common\models\Services::findAll(['homepage' => 1]);
+        $portofolio = \common\models\Portofolio::findAll(['published' => 1]);
+        return $this->render('index', [
+            'model' => $model,
+            'services' => $services,
+            'portofolio' => $portofolio,
+        ]);
     }
 
     /**

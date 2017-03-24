@@ -49,7 +49,7 @@ AppAsset::register($this);
                 ['label' => 'Team Member', 'url' => ['/team']],
                 ['label' => 'Partner', 'url' => ['/partner']],
                 ['label' => 'Location', 'url' => ['/location']],
-                ['label' => 'News and Articles', 'url' => ['/articles']],
+                ['label' => 'News and Articles', 'url' => ['/article']],
             ]
         ];
 

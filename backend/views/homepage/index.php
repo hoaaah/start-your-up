@@ -172,10 +172,10 @@ IF(isset($model)):
             <?=
             $form->field($homepage, 'services')->widget(Multiselect::className(), [
                 "options" => ['multiple'=>"multiple"], // for the actual multiselect
-                'data' => $services,
+                'data' => $services ? $services : ['' => 'No Data, Please Input Services first!'],
                 "clientOptions" => 
                     [
-                        "includeSelectAllOption" => true,
+                        "includeSelectAllOption" => $services ? true : false,
                         'numberDisplayed' => 10
                     ], 
             ]);           
@@ -184,10 +184,10 @@ IF(isset($model)):
             <?=
             $form->field($homepage, 'portofolio')->widget(Multiselect::className(), [
                 "options" => ['multiple'=>"multiple"], // for the actual multiselect
-                'data' => $portofolio,
+                'data' => $portofolio ? $portofolio : ['' => 'No Data, Please Input Porfofolio first!'],
                 "clientOptions" => 
                     [
-                        "includeSelectAllOption" => true,
+                        "includeSelectAllOption" => $portofolio ? true : false,
                         'numberDisplayed' => 10
                     ], 
             ]);           
@@ -196,10 +196,10 @@ IF(isset($model)):
             <?=
             $form->field($homepage, 'team')->widget(Multiselect::className(), [
                 "options" => ['multiple'=>"multiple"], // for the actual multiselect
-                'data' => $team,
+                'data' => $team ? $team : ['' => 'No Data, Please Input Team Member first!'],
                 "clientOptions" => 
                     [
-                        "includeSelectAllOption" => true,
+                        "includeSelectAllOption" => $team ? true : false,
                         'numberDisplayed' => 10
                     ], 
             ]);           
@@ -208,10 +208,10 @@ IF(isset($model)):
             <?=
             $form->field($homepage, 'partner')->widget(Multiselect::className(), [
                 "options" => ['multiple'=>"multiple"], // for the actual multiselect
-                'data' => $partner,
+                'data' => $partner ? $partner : ['' => 'No Data, Please Input Partner first!'],
                 "clientOptions" => 
                     [
-                        "includeSelectAllOption" => true,
+                        "includeSelectAllOption" => $partner ? true : false,
                         'numberDisplayed' => 10
                     ], 
             ]);           

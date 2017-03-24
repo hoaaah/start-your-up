@@ -31,6 +31,20 @@ use kartik\file\FileInput;
         ]        
     ]); ?>
 
+    <?php
+    // Tagging support Multiple
+    // IF($articleTags) $articleTags->tag_id =  ['red', 'green']; // initial value
+    echo $form->field($tags, 'input_tags')->widget(Select2::classname(), [
+        'data' => $availableTags,
+        'options' => ['placeholder' => 'Tags ...', 'multiple' => true],
+        'pluginOptions' => [
+            'tags' => true,
+            'tokenSeparators' => [',', ' '],
+            'maximumInputLength' => 10
+        ],
+    ])->label('Tags');
+    ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

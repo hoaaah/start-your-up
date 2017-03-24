@@ -1,8 +1,7 @@
 <?php
+use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-
-$this->title = Yii::$app->name;
+$this->title = $model->company_name;
 // $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/hoaaah/yii2-startbootstrap-stylish-portfolio/assets');
 $agency = hoaaah\agency\AgencyAsset::register($this);
 // <img class="img-portfolio img-responsive" src=<?= $stylish->baseUrl.'/'."img/portfolio-3.jpg"
@@ -12,9 +11,9 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
     <header id="page-top">
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Lead In Message!</div>
-                <div class="intro-heading">Intro Message</div>
-                <a href="#services" class="page-scroll btn btn-xl">Services</a>
+                <div class="intro-lead-in"><?= Html::encode($model->lead_message) ?></div>
+                <div class="intro-heading"><?= Html::encode($model->intro_message) ?></div>
+                <a href="#services" class="page-scroll btn btn-xl"><?= Html::encode($model->services_button) ?></a>
             </div>
         </div>
     </header>
@@ -24,35 +23,43 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Services</h2>
-                    <h3 class="section-subheading text-muted">We serve you this service.</h3>
+                    <h2 class="section-heading"><?= Html::encode($model->service_title) ?></h2>
+                    <h3 class="section-subheading text-muted"><?= Html::encode($model->service_message) ?></h3>
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-4">
+                <?php
+                    $colGiven = $model->service_homepage;
+                    $serviceAssigned = \common\models\Services::find()->where(['homepage' => 1])->count('id');
+                    $colMin = min($colGiven, $serviceAssigned);
+                    switch (true) {
+                        case $colMin <= 4:
+                            $col1 = 12/$colMin;
+                            break;
+                        case $colMin > 4 :
+                            $col1 = 12/4;
+                            $colMin <= 8 ? $col2 = 12/($colMin-4) : $col2 = 4;
+                            if($colMin > 8) $col3 = 12/($colMin-8);
+                            break;
+                    }
+                    $i = 1;
+                    $j = 1;
+                    foreach($services as $services):
+                ?>
+                <div class="col-md-<?php echo ${'col'.$j} ?>">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                        <i class="<?= $services->services_icon ?> fa-stack-1x fa-inverse"></i>
                     </span>
-                    <h4 class="service-heading">E-Commerce</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <h4 class="service-heading"><?= $services->title ?></h4>
+                    <p class="text-muted"><?= $services->content ?></p>
                 </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Responsive Design</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Web Security</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
+
+                <?php 
+                    $i++; 
+                    IF(($i%4) == 0 ) $j++; 
+                    endforeach; 
+                ?>
             </div>
         </div>
     </section>
@@ -62,8 +69,8 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Here are our portofolio.</h3>
+                    <h2 class="section-heading"><?= Html::encode($model->portofolio_title) ?></h2>
+                    <h3 class="section-subheading text-muted"><?= Html::encode($model->portofolio_message) ?></h3>
                 </div>
             </div>
             <div class="row">
@@ -160,8 +167,8 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading"><?= Html::encode($model->about_title) ?></h2>
+                    <h3 class="section-subheading text-muted"><?= Html::encode($model->about_message) ?></h3>
                 </div>
             </div>
             <div class="row">
@@ -241,8 +248,8 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading"><?= Html::encode($model->team_title) ?></h2>
+                    <h3 class="section-subheading text-muted"><?= Html::encode($model->team_message_1) ?></h3>
                 </div>
             </div>
             <div class="row">
@@ -294,7 +301,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Our team are best of the best with great dedication in open source project.</p>
+                    <p class="large text-muted"><?= Html::encode($model->team_message_2) ?></p>
                 </div>
             </div>
         </div>

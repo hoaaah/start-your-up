@@ -5,6 +5,8 @@ namespace backend\controllers;
 use Yii;
 use common\models\Articles;
 use backend\models\ArticlesSearch;
+use common\models\Tags;
+use common\models\ArticleTags;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -64,12 +66,42 @@ class ArticleController extends Controller
     public function actionCreate()
     {
         $model = new Articles();
+        $tags = new Tags();
+        $articleTags = new ArticleTags();
+        $availableTags = \yii\helpers\ArrayHelper::map(Tags::find()->all(),'title','title'); 
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if ($model->load(Yii::$app->request->post()) && $tags->load(Yii::$app->request->post()) ){
+            IF($model->save()){
+                // after article saved, we save tags
+                $preInsertTag = NULL;
+                foreach($tags->input_tags as $input ){
+                    $checkTag = Tags::findOne(['path' => strtolower($input)]);
+                    IF(!$checkTag){
+                        $tags = new Tags();
+                        $tags->title = $input;
+                        $tags->path = strtolower($input);
+                        $tags->save();
+                        $preInsertTag[] = $tags->id;
+                    }ELSE{
+                        $preInsertTag[] = $checkTag->id;
+                    }
+                }
+                // after all tags saved, we create articles tags
+                foreach($preInsertTag AS $tag_id){
+                    $articleTags = new ArticleTags();
+                    $articleTags->article_id = $model->id;
+                    $articleTags->tag_id = $tag_id;
+                    $articleTags->save();
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } 
+        else {
             return $this->render('create', [
                 'model' => $model,
+                'tags' => $tags,
+                'articleTags' => $articleTags,
+                'availableTags' => $availableTags,
             ]);
         }
     }

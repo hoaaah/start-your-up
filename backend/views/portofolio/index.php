@@ -23,9 +23,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'service_id',
+            [
+                'label' => 'Portofolio',
+                'format' => 'raw',
+                'value' => function($model) {
+                    IF($model->image) return Html::img(Yii::$app->params['uploadUrl'].'/portofolio/'.$model->image, ['width' => '70px', 'title' => $model->title, 'alt' => $model->title]);
+                }
+            ],
+            [
+                'label' => 'Services',
+                'attribute' => 'service_id',
+                'value' => 'service.title',
+            ],
             'title',
             'short_explanation',
             // 'image',
