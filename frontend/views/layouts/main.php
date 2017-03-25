@@ -53,9 +53,9 @@ IF(1 == 1):
                     <li>
                         <a class="page-scroll" href="#portfolio">Portfolio</a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a class="page-scroll" href="#about">About</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a class="page-scroll" href="#team">Team</a>
                     </li>

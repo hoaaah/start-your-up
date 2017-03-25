@@ -75,10 +75,15 @@ class SiteController extends Controller
         $model = \common\models\Company::findOne(1);
         $services = \common\models\Services::findAll(['homepage' => 1]);
         $portofolio = \common\models\Portofolio::findAll(['published' => 1]);
+        $team = \common\models\Team::findAll(['homepage' => 1]);
+        $maps = \common\models\Location::find()->all();
+
         return $this->render('index', [
             'model' => $model,
             'services' => $services,
             'portofolio' => $portofolio,
+            'team' => $team,
+            'maps' => $maps,
         ]);
     }
 
