@@ -87,6 +87,35 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionImage($cat, $id)
+    {
+        $response = Yii::$app->getResponse();
+
+        // 1 => portofolio
+        switch ($cat) {
+            case 1:
+                $portofolio = \common\models\Portofolio::findOne(['id' => $id]);        
+                return $response->sendFile(Yii::$app->params['uploadPath'] . 'portofolio\\' . $portofolio->image, $portofolio->image, [
+                        // 'mimeType' => $model->type,
+                        // 'fileSize' => $model->size,
+                        'inline' => true
+                ]);
+                break;
+            case 2:
+                $team = \common\models\Team::findOne(['id' => $id]);        
+                return $response->sendFile(Yii::$app->params['uploadPath'] . 'avatar\\' . $team->avatar, $team->avatar, [
+                        // 'mimeType' => $model->type,
+                        // 'fileSize' => $model->size,
+                        'inline' => true
+                ]);
+                break;            
+            
+            default:
+                # code...
+                break;
+        }
+    }
+
     /**
      * Logs in a user.
      *

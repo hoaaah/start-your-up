@@ -9,7 +9,7 @@ $params = array_merge(
 return [
     'id' => 'app-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'podium'],
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
         'fixture' => [
@@ -26,6 +26,21 @@ return [
                 ],
             ],
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            // 'useFileTransport' => true, //false
+            // 'transport' => [
+            //     'class' => 'Swift_SmtpTransport',
+            //     'host' => 'localhost',
+            //     // 'username' => 'SMTP username',
+            //     // 'password' => 'SMTP password',
+            //     'port' => '25', // optional
+            //     // 'encryption' => 'SMTP encryption', // optional
+            // ],
+        ],
+    ],
+    'modules' => [
+        'podium' => 'bizley\podium\Podium',
     ],
     'params' => $params,
 ];

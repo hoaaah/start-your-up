@@ -74,25 +74,28 @@ class ArticleController extends Controller
             IF($model->save()){
                 // after article saved, we save tags
                 $preInsertTag = NULL;
-                foreach($tags->input_tags as $input ){
-                    $checkTag = Tags::findOne(['path' => strtolower($input)]);
-                    IF(!$checkTag){
-                        $tags = new Tags();
-                        $tags->title = $input;
-                        $tags->path = strtolower($input);
-                        $tags->save();
-                        $preInsertTag[] = $tags->id;
-                    }ELSE{
-                        $preInsertTag[] = $checkTag->id;
+                if($tags->input_tags){
+                    foreach($tags->input_tags as $input ){
+                        $checkTag = Tags::findOne(['path' => strtolower($input)]);
+                        IF(!$checkTag){
+                            $tags = new Tags();
+                            $tags->title = $input;
+                            $tags->path = strtolower($input);
+                            $tags->save();
+                            $preInsertTag[] = $tags->id;
+                        }ELSE{
+                            $preInsertTag[] = $checkTag->id;
+                        }
                     }
+                    // after all tags saved, we create articles tags
+                    foreach($preInsertTag AS $tag_id){
+                        $articleTags = new ArticleTags();
+                        $articleTags->article_id = $model->id;
+                        $articleTags->tag_id = $tag_id;
+                        $articleTags->save();
+                    }                    
                 }
-                // after all tags saved, we create articles tags
-                foreach($preInsertTag AS $tag_id){
-                    $articleTags = new ArticleTags();
-                    $articleTags->article_id = $model->id;
-                    $articleTags->tag_id = $tag_id;
-                    $articleTags->save();
-                }
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } 

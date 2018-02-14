@@ -10,6 +10,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use hoaaah\agency\AgencyAsset;
+use yii\bootstrap\Modal;
 
 AppAsset::register($this);
 AgencyAsset::register($this);
@@ -20,6 +21,14 @@ AgencyAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Custom Fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -38,7 +47,7 @@ IF(1 == 1):
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top"><?= Yii::$app->name ?></a>
+                <a class="navbar-brand page-scroll" href="#page-top"><?= $this->title ?></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -62,6 +71,12 @@ IF(1 == 1):
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
+                    <li>
+                        <?= Html::a('Articles', ['/article'], ['title' => 'Articles', 'data-toggle' => 'modal', 'data-target' => '#myModal', 'data-title' => "Articles"]) ?>
+                    </li>
+                    <li>
+                        <?= Html::a('Forum', ['/forum']) ?>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -70,6 +85,33 @@ IF(1 == 1):
     </nav>
 
 <?= $content ?>
+
+<?php Modal::begin([
+    'id' => 'myModal',
+    'header' => '<h4 class="modal-title">More...</h4>',
+    'options' => [
+        'tabindex' => false // important for Select2 to work properly
+    ], 
+    'size'=> 'modal-lg'
+]); 
+echo '...';
+Modal::end();
+
+$this->registerJs("
+    $('#myModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var modal = $(this)
+        var title = button.data('title') 
+        var href = button.attr('href') 
+        modal.find('.modal-title').html(title)
+        modal.find('.modal-body').html('<i class=\"fa fa-spinner fa-spin\"></i>')
+        $.post(href)
+            .done(function( data ) {
+                modal.find('.modal-body').html(data)
+            });
+        })
+");
+?>
 
 <?php endif; ?>
 

@@ -10,7 +10,7 @@ return [
     'id' => 'app-frontend',
     'name' => 'Corporate-Site',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'forum'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -42,6 +42,11 @@ return [
             'showScriptName' => false,
             'rules' => [
             ],
+        ],
+    ],
+    'modules' => [
+        'forum' => [
+            'class' => 'bizley\podium\Podium',
         ],
     ],
     'params' => $params,

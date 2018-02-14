@@ -14,9 +14,7 @@ use dosamigos\google\maps\overlays\Polygon;
 use dosamigos\google\maps\layers\BicyclingLayer;
 
 $this->title = $model->company_name;
-// $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/hoaaah/yii2-startbootstrap-stylish-portfolio/assets');
 $agency = hoaaah\agency\AgencyAsset::register($this);
-// <img class="img-portfolio img-responsive" src=<?= $stylish->baseUrl.'/'."img/portfolio-3.jpg"
 ?>
  
     <!-- Header -->
@@ -98,7 +96,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src=<?= Yii::$app->params['uploadUrl'].'/portofolio/'.$portofolio->image ?> class="img-responsive" alt="">
+                        <img src=<?= \yii\helpers\Url::to(['image', 'cat' => 1, 'id' => $portofolio->id]) ?> class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
                         <h4><?= Html::encode($portofolio->title) ?></h4>
@@ -208,7 +206,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
                 ?>             
                 <div class="col-sm-4">
                     <div class="team-member">
-                        <img src="<?= Yii::$app->params['uploadUrl'].'/avatar/'.$team->avatar ?>" class="img-responsive img-circle" alt="">
+                        <img src="<?= \yii\helpers\Url::to(['image', 'cat' => 2, 'id' => $team->id]) ?>" class="img-responsive img-circle" alt="">
                         <h4><?= Html::encode($team->name) ?></h4>
                         <p class="text-muted"><?= $team->job ?></p>
                         <ul class="list-inline social-buttons">
@@ -263,7 +261,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
     <?php 
         $centerCoordinate = new LatLng(['lat' => Yii::$app->params['initialMapLatitude'], 'lng' => Yii::$app->params['initialMapLongitude']]);
         $map = new Map([
-            'containerOptions' => ['id' => 'contact'],
+            'containerOptions' => ['id' => 'contact', 'class' => 'map'],
             'center' => $centerCoordinate,
             'zoom' => Yii::$app->params['initialMapZoom'],
             'width' => '100%',
@@ -335,7 +333,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
                                 <!-- Project Details Go Here -->
                                 <h2><?= Html::encode($portofolio->title) ?></h2>
                                 <p class="item-intro text-muted"><?= $portofolio->short_explanation ?></p>
-                                <img class="img-responsive img-centered" src=<?= Yii::$app->params['uploadUrl'].'/portofolio/'.$portofolio->image ?> alt="">
+                                <img class="img-responsive img-centered" src=<?= \yii\helpers\Url::to(['image', 'cat' => 1, 'id' => $portofolio->id]) ?> alt="">
                                 <?= $portofolio->content ?>
                                 <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                             </div>
@@ -362,13 +360,22 @@ $this->registerJs(<<<JS
         that.find('iframe').css("pointer-events", "none");
     }
     var onMapClickHandler = function(event) {
-            var that = $(this);
+            // var that = $(this);
+            // // Disable the click handler until the user leaves the map area
+            // that.off('click', onMapClickHandler);
+            // // Enable scrolling zoom
+            // that.find('iframe').css("pointer-events", "auto");
+            // // Handle the mouse leave event
+            // that.on('mouseleave', onMapMouseleaveHandler);
+
+            // modified
+             that = $(this);
             // Disable the click handler until the user leaves the map area
             that.off('click', onMapClickHandler);
             // Enable scrolling zoom
             that.find('iframe').css("pointer-events", "auto");
             // Handle the mouse leave event
-            that.on('mouseleave', onMapMouseleaveHandler);
+            that.on('mouseleave', onMapMouseleaveHandler);            
         }
         // Enable map zooming with mouse scroll when the user clicks the map
     $('.map').on('click', onMapClickHandler);
