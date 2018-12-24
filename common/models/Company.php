@@ -43,7 +43,7 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['service_homepage', 'portofolio_homepage'], 'integer'],
+            [['service_homepage', 'portofolio_homepage', 'enable_forum', 'enable_quote_request', 'enable_articles', 'enable_portofolio', 'enable_team', 'enable_contact'], 'integer'],
             [['team_message_2'], 'string'],
             [['company_name', 'lead_message'], 'string', 'max' => 30],
             [['intro_message', 'service_title', 'portofolio_title', 'about_title', 'team_title'], 'string', 'max' => 50],

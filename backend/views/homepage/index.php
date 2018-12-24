@@ -53,6 +53,7 @@ IF(isset($model)):
                     ],
                     [
                         'attribute'=>'intro_message', 
+                        'format'=>'raw',
                         // 'valueColOptions'=>['style'=>'width:30%']
                     ],
                     [
@@ -68,6 +69,7 @@ IF(isset($model)):
                     ],
                     [
                         'attribute'=>'service_message', 
+                        'format'=>'raw',
                         'label' => 'Message',
                         'valueColOptions'=>['style'=>'width:15%']
                     ],
@@ -98,6 +100,7 @@ IF(isset($model)):
                     ],
                     [
                         'attribute'=>'portofolio_message', 
+                        'format'=>'raw',
                         'label' => 'Message',
                         'valueColOptions'=>['style'=>'width:15%']
                     ],
@@ -127,6 +130,7 @@ IF(isset($model)):
                     ],
                     [
                         'attribute'=>'about_message', 
+                        'format'=>'raw',
                         // 'valueColOptions'=>['style'=>'width:30%']
                     ],
                 ],
@@ -138,13 +142,96 @@ IF(isset($model)):
                     ],
                     [
                         'attribute'=>'team_message_1', 
+                        'format'=>'raw',
                         // 'valueColOptions'=>['style'=>'width:30%']
                     ],
                     [
                         'attribute'=>'team_message_2', 
+                        'format'=>'raw',
                     ],                    
                 ],
-            ],            
+            ],
+            [
+                'columns' => [
+                    [
+                        'attribute'=>'enable_forum', 
+                        'format'=>'raw',
+                        'value'=>$model->enable_forum ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
+                        'type'=>DetailView::INPUT_SWITCH,
+                        'widgetOptions' => [
+                            'pluginOptions' => [
+                                'onText' => 'Yes',
+                                'offText' => 'No',
+                            ]
+                        ],
+                    ],
+                    [
+                        'attribute'=>'enable_quote_request',
+                        'label' => 'Enable Quotation Request',
+                        'format'=>'raw',
+                        'value'=>$model->enable_quote_request ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
+                        'type'=>DetailView::INPUT_SWITCH,
+                        'widgetOptions' => [
+                            'pluginOptions' => [
+                                'onText' => 'Yes',
+                                'offText' => 'No',
+                            ]
+                        ],
+                    ],
+                    [
+                        'attribute' => 'enable_articles',
+                        'format'=>'raw',
+                        'value'=>$model->enable_articles ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
+                        'type'=>DetailView::INPUT_SWITCH,
+                        'widgetOptions' => [
+                            'pluginOptions' => [
+                                'onText' => 'Yes',
+                                'offText' => 'No',
+                            ]
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'columns' => [
+                    [
+                        'attribute'=>'enable_portofolio', 
+                        'format'=>'raw',
+                        'value'=>$model->enable_portofolio ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
+                        'type'=>DetailView::INPUT_SWITCH,
+                        'widgetOptions' => [
+                            'pluginOptions' => [
+                                'onText' => 'Yes',
+                                'offText' => 'No',
+                            ]
+                        ],
+                    ],
+                    [
+                        'attribute'=>'enable_team',
+                        'format'=>'raw',
+                        'value'=>$model->enable_team ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
+                        'type'=>DetailView::INPUT_SWITCH,
+                        'widgetOptions' => [
+                            'pluginOptions' => [
+                                'onText' => 'Yes',
+                                'offText' => 'No',
+                            ]
+                        ],
+                    ],
+                    [
+                        'attribute' => 'enable_contact',
+                        'format'=>'raw',
+                        'value'=>$model->enable_contact ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
+                        'type'=>DetailView::INPUT_SWITCH,
+                        'widgetOptions' => [
+                            'pluginOptions' => [
+                                'onText' => 'Yes',
+                                'offText' => 'No',
+                            ]
+                        ],
+                    ],
+                ],
+            ],         
             [
                 'columns' => [
                     [
