@@ -2,6 +2,7 @@
 
 namespace console\controllers;
 
+use yii;
 use yii\console\Controller;
 
 /**
