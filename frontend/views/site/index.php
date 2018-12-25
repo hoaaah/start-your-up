@@ -75,6 +75,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
         </div>
     </section>
 
+    <?php if($model->enable_portofolio) : ?>
     <!-- Portfolio Grid Section -->
     <section id="portfolio" class="bg-light-gray">
         <div class="container">
@@ -109,6 +110,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
             </div>
         </div>
     </section>
+    <?php endif; ?>
 
     <!-- About Section -->
     <!--<section id="about">
@@ -191,6 +193,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
         </div>
     </section>-->
 
+    <?php if($model->enable_team) : ?>
     <!-- Team Section -->
     <section id="team" class="bg-light-gray">
         <div class="container">
@@ -228,6 +231,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
             </div>
         </div>
     </section>
+    <?php endif; ?>
 
     <!-- Clients Aside -->
     <aside class="clients">
@@ -257,6 +261,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
         </div>
     </aside>
 
+    <?php if($model->enable_contact) : ?>
     <!-- Contact Section -->
     <?php 
         $centerCoordinate = new LatLng(['lat' => Yii::$app->params['initialMapLatitude'], 'lng' => Yii::$app->params['initialMapLongitude']]);
@@ -282,6 +287,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
         }
         echo $map->display();
     ?>
+    <?php endif; ?>
 
     <footer>
         <div class="container">
@@ -314,6 +320,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
     <!-- Portfolio Modals -->
     <!-- Use the modals below to showcase details about your portfolio projects! -->
     <?php
+        if($model->enable_portofolio) :
         foreach($modalPortofolio as $portofolio):
     ?>    
     <!-- Portfolio Modal 1 -->
@@ -335,6 +342,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
                                 <p class="item-intro text-muted"><?= $portofolio->short_explanation ?></p>
                                 <img class="img-responsive img-centered" src=<?= \yii\helpers\Url::to(['image', 'cat' => 1, 'id' => $portofolio->id]) ?> alt="">
                                 <?= $portofolio->content ?>
+                                <?= Html::a('<i class="fa fa-download"></i> Apply This Product', ['apply', 'id' => $portofolio->id], ['class' => 'btn btn-primary']) ?>
                                 <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                             </div>
                         </div>
@@ -344,7 +352,10 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
         </div>
     </div>
 
-    <?php endforeach; ?>
+    <?php
+        endforeach;
+        endif;
+    ?>
 
 
 <?php 
