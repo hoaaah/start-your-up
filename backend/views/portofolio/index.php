@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PortofolioSearch */
@@ -27,7 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Portofolio',
                 'format' => 'raw',
                 'value' => function($model) {
-                    IF($model->image) return Html::img(Yii::$app->params['uploadUrl'].'/portofolio/'.$model->image, ['width' => '70px', 'title' => $model->title, 'alt' => $model->title]);
+                    $response = Yii::$app->getResponse();
+                    IF($model->image) return Html::img(Url::to(['/site/image', 'cat' => 1, 'id' => $model->id]),
+                        ['width' => '70px', 'title' => $model->title, 'alt' => $model->title]
+                    );
                 }
             ],
             [
