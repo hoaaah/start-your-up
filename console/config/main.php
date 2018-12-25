@@ -15,7 +15,10 @@ return [
         'fixture' => [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
-          ],
+        ],    
+        'migration' => [
+            'class' => 'bizley\migration\controllers\MigrationController',
+        ],
     ],
     'components' => [
         'log' => [
@@ -29,14 +32,18 @@ return [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // 'useFileTransport' => true, //false
-            // 'transport' => [
-            //     'class' => 'Swift_SmtpTransport',
-            //     'host' => 'localhost',
-            //     // 'username' => 'SMTP username',
-            //     // 'password' => 'SMTP password',
-            //     'port' => '25', // optional
-            //     // 'encryption' => 'SMTP encryption', // optional
-            // ],
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'localhost',
+                // 'username' => 'SMTP username',
+                // 'password' => 'SMTP password',
+                'port' => '25', // optional
+                // 'encryption' => 'SMTP encryption', // optional
+            ],
+        ],
+        'mailqueue' => [
+            'class' => 'nterms\mailqueue\MailQueue',
+			'table' => '{{%mail_queue}}',
         ],
     ],
     'modules' => [

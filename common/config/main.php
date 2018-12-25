@@ -13,6 +13,23 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            // send all mails to a file by default. 
+            // You have to set 'useFileTransport' to false and configure a transport for the mailer to send real emails.
+            // 'useFileTransport' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'localhost',
+                'port' => 25,
+            ],
+        ],
+        'mailqueue' => [
+            'class' => 'nterms\mailqueue\MailQueue',
+			'table' => '{{%mail_queue}}',
+			'mailsPerRound' => 10,
+			'maxAttempts' => 3,
+        ],
         'assetManager' => [
             'bundles' => [
                 'dosamigos\google\maps\MapAsset' => [

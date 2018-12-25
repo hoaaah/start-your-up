@@ -10,4 +10,5 @@ return [
     'initialMapLatitude' => 'your-initial-map-latitude-here',
     'initialMapLongitude' => 'your-initial-map-longitude-here',
     'initialMapZoom' => 'your-initial-map-zoom-here',
+    'useMailQueue' => 'disable', // enable or disable
 ];
