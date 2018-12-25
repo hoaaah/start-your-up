@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\helpers\Html;
 
 /**
  * Site controller
@@ -78,6 +79,8 @@ class SiteController extends Controller
         $team = \common\models\Team::findAll(['homepage' => 1]);
         $maps = \common\models\Location::find()->all();
 
+        $this->layout = 'main_agency';
+
         return $this->render('index', [
             'model' => $model,
             'services' => $services,
@@ -113,6 +116,51 @@ class SiteController extends Controller
             default:
                 # code...
                 break;
+        }
+    }
+
+    public function actionApply($id)
+    {
+        $portofolio = \common\models\Portofolio::findOne(['id' => $id]);
+        $model = new \common\models\QuotationRequest();
+        $model->product_request = $id;
+        $model->date_of_request = date('Y-m-d');
+        $model->partner_category = 'Client-Frontend';
+
+        // Yii::$app->mailqueue->compose('quotation/request', ['model' => $model, 'portofolio' => $portofolio])
+        // ->setFrom('from@domain.com')
+        // ->setTo($model->customer_email)
+        // ->setBcc ('admin@admin.com')
+        // ->setSubject('Quotation Request for '.$portofolio->title)
+        // ->send();
+
+        $getMeBack = \yii\helpers\Url::to(['apply', 'id' => $id]);
+        
+        if ($model->load(Yii::$app->request->post())) {
+            IF($model->save()){
+                $message = "Request Success, we will answer you request immediately via email or phone.";
+                $status = 1;
+                return $this->render('apply_result', [
+                    'message' => $message,
+                    'portofolio' => $portofolio,
+                    'getMeBack' => $getMeBack,
+                    'status' => $status
+                ]);
+            }ELSE{
+                $message = "Request failed. Click this button to retry. ".Html::a('Click to retry', $getMeBack, ['class' => 'btn btn-xs btn-danger']);
+                $status = 0;
+                return $this->render('apply_result', [
+                    'message' => $message,
+                    'portofolio' => $portofolio,
+                    'getMeBack' => $getMeBack,
+                    'status' => $status
+                ]);
+            }
+        } else {
+            return $this->render('apply', [
+                'model' => $model,
+                'portofolio' => $portofolio,
+            ]);
         }
     }
 
