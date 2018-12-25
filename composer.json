@@ -29,7 +29,9 @@
         "sjaakp/yii2-symbol-picker": "dev-master",
         "2amigos/yii2-multi-select-widget": "*",
         "kartik-v/yii2-tabs-x": "*",
-        "bizley/podium": "^0.7.0"
+        "bizley/podium": "^0.7.0",
+        "bizley/migration": "3.1",
+        "nterms/yii2-mailqueue": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -42,12 +44,12 @@
         "c006/yii2-migration-utility": "dev-master"
     },
     "config": {
-        "process-timeout": 1800
-    },
-    "extra": {
-        "asset-installer-paths": {
+        "process-timeout": 1800,
+        "fxp-asset": {
+          "installer-paths": {
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
+          }
         }
     },
     "scripts": {
