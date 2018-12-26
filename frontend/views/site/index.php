@@ -34,7 +34,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading"><?= Html::encode($model->service_title) ?></h2>
-                    <h3 class="section-subheading text-muted"><?= Html::encode($model->service_message) ?></h3>
+                    <h3 class="section-subheading text-muted"><?= $model->service_message ?></h3>
                 </div>
             </div>
             <div class="row text-center">
@@ -226,7 +226,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted"><?= Html::encode($model->team_message_2) ?></p>
+                    <p class="large text-muted"><?= $model->team_message_2 ?></p>
                 </div>
             </div>
         </div>
@@ -342,7 +342,7 @@ $agency = hoaaah\agency\AgencyAsset::register($this);
                                 <p class="item-intro text-muted"><?= $portofolio->short_explanation ?></p>
                                 <img class="img-responsive img-centered" src=<?= \yii\helpers\Url::to(['image', 'cat' => 1, 'id' => $portofolio->id]) ?> alt="">
                                 <?= $portofolio->content ?>
-                                <?= Html::a('<i class="fa fa-download"></i> Apply This Product', ['apply', 'id' => $portofolio->id], ['class' => 'btn btn-primary']) ?>
+                                <?= $model->enable_quote_request ? Html::a('<i class="fa fa-download"></i> Apply This Product', ['apply', 'id' => $portofolio->id], ['class' => 'btn btn-primary']) : "" ?>
                                 <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                             </div>
                         </div>
