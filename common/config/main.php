@@ -1,13 +1,17 @@
 <?php
 $params = file_exists(__DIR__ . '/params-local.php');
 // $params = require(__DIR__ . '/params-locali.php');
-IF($params === false){
+if ($params === false) {
     $params = require(__DIR__ . '/params.php');
-}ELSE{
+} else {
     $params = require(__DIR__ . '/params-local.php');
 }
 
 return [
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
+    ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
@@ -26,9 +30,9 @@ return [
         ],
         'mailqueue' => [
             'class' => 'nterms\mailqueue\MailQueue',
-			'table' => '{{%mail_queue}}',
-			'mailsPerRound' => 10,
-			'maxAttempts' => 3,
+            'table' => '{{%mail_queue}}',
+            'mailsPerRound' => 10,
+            'maxAttempts' => 3,
         ],
         'assetManager' => [
             'bundles' => [
@@ -40,6 +44,6 @@ return [
                     ]
                 ]
             ]
-        ],        
+        ],
     ],
 ];
